@@ -12,6 +12,7 @@ interface EventListenerInterface
      *
      * @param EventMessageInterface $eventMessage
      * @return void
+     * @throws EventListenerException
      */
     public function dispatch(EventMessageInterface $eventMessage): void;
 }

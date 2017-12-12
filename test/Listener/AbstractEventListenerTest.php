@@ -57,6 +57,52 @@ class AbstractEventListenerTest extends TestCase
         $this->assertSame($occurredOn, $listener->getOccurredOn());
         $this->assertSame(['foo' => 'bar'], $listener->getMetaData());
     }
+
+    /**
+     * Method not found.
+     *
+     * Test that event listener can not be found and an exception will be thrown.
+     *
+     * @covers                   \ExtendsFramework\Event\Listener\AbstractEventListener::dispatch()
+     * @covers                   \ExtendsFramework\Event\Listener\AbstractEventListener::getMethod()
+     * @covers                   \ExtendsFramework\Event\Listener\Exception\MethodNotFound::__construct()
+     * @expectedException        \ExtendsFramework\Event\Listener\Exception\MethodNotFound
+     * @expectedExceptionMessage No event listener method found for payload name "PayloadFoo".
+     */
+    public function testMethodNotFound(): void
+    {
+        $payload = $this->createMock(PayloadInterface::class);
+
+        $payloadType = $this->createMock(PayloadTypeInterface::class);
+        $payloadType
+            ->method('getName')
+            ->willReturn('PayloadFoo');
+
+        $occurredOn = $this->createMock(DateTime::class);
+
+        $eventMessage = $this->createMock(EventMessageInterface::class);
+        $eventMessage
+            ->method('getPayload')
+            ->willReturn($payload);
+
+        $eventMessage
+            ->method('getPayloadType')
+            ->willReturn($payloadType);
+
+        $eventMessage
+            ->method('getMetaData')
+            ->willReturn(['foo' => 'bar']);
+
+        $eventMessage
+            ->method('getOccurredOn')
+            ->willReturn($occurredOn);
+
+        /**
+         * @var EventMessageInterface $eventMessage
+         */
+        $listener = new ListenerStub();
+        $listener->dispatch($eventMessage);
+    }
 }
 
 class ListenerStub extends AbstractEventListener
