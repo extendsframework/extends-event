@@ -15,7 +15,7 @@ class EventPublisherTest extends TestCase
      *
      * Test that event message will be published to correct listener.
      *
-     * @covers \ExtendsFramework\Event\Publisher\EventPublisher::addListener()
+     * @covers \ExtendsFramework\Event\Publisher\EventPublisher::addEventListener()
      * @covers \ExtendsFramework\Event\Publisher\EventPublisher::publish()
      * @covers \ExtendsFramework\Event\Publisher\EventPublisher::getEventListeners()
      */
@@ -43,8 +43,8 @@ class EventPublisherTest extends TestCase
          */
         $publisher = new EventPublisher();
         $publisher
-            ->addListener($listener, 'PayloadBar')
-            ->addListener($listener, 'PayloadFoo')
+            ->addEventListener($listener, 'PayloadBar')
+            ->addEventListener($listener, 'PayloadFoo')
             ->publish($message);
     }
 }

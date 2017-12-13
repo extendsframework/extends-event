@@ -33,7 +33,7 @@ class EventPublisher implements EventPublisherInterface
      * @param string                 $payloadName
      * @return EventPublisher
      */
-    public function addListener(EventListenerInterface $eventListener, string $payloadName): EventPublisher
+    public function addEventListener(EventListenerInterface $eventListener, string $payloadName): EventPublisher
     {
         $this->eventListeners[$payloadName][] = $eventListener;
 
