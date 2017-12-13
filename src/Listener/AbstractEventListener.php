@@ -5,11 +5,12 @@ namespace ExtendsFramework\Event\Listener;
 
 use DateTime;
 use ExtendsFramework\Event\EventMessageInterface;
-use ExtendsFramework\Event\Listener\Exception\MethodNotFound;
-use ReflectionMethod;
+use ExtendsFramework\Message\Payload\PayloadMethodTrait;
 
 abstract class AbstractEventListener implements EventListenerInterface
 {
+    use PayloadMethodTrait;
+
     /**
      * Prefix for method.
      *
@@ -39,41 +40,7 @@ abstract class AbstractEventListener implements EventListenerInterface
         $this->metaData = $eventMessage->getMetaData();
         $this->occurredOn = $eventMessage->getOccurredOn();
 
-        $method = $this->getMethod($eventMessage);
-
-        $method->invokeArgs($this, [$eventMessage->getPayload()]);
-    }
-
-    /**
-     * Get reflection method for event message payload.
-     *
-     * Method name is based on the method prefix combined with payload name.
-     *
-     * @param EventMessageInterface $eventMessage
-     * @return ReflectionMethod
-     * @throws EventListenerException
-     */
-    protected function getMethod(EventMessageInterface $eventMessage): ReflectionMethod
-    {
-        $method = $this->getPrefix() . $eventMessage
-                ->getPayloadType()
-                ->getName();
-
-        if (method_exists($this, $method) === false) {
-            throw new MethodNotFound($eventMessage);
-        }
-
-        return new ReflectionMethod($this, $method);
-    }
-
-    /**
-     * Get method prefix.
-     *
-     * @return string
-     */
-    protected function getPrefix(): string
-    {
-        return $this->prefix;
+        $this->getMethod($eventMessage)($eventMessage->getPayload());
     }
 
     /**
