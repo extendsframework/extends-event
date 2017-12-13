@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace ExtendsFramework\Event\Listener;
 
-use DateTime;
 use ExtendsFramework\Event\EventMessageInterface;
 use ExtendsFramework\Message\Payload\PayloadMethodTrait;
 
@@ -19,47 +18,29 @@ abstract class AbstractEventListener implements EventListenerInterface
     protected $prefix = 'listen';
 
     /**
-     * Event message meta data.
+     * Event message.
      *
-     * @var array
+     * @var EventMessageInterface
      */
-    protected $metaData;
-
-    /**
-     * Date time event message occurred on.
-     *
-     * @var DateTime
-     */
-    protected $occurredOn;
+    protected $eventMessage;
 
     /**
      * @inheritDoc
      */
     public function dispatch(EventMessageInterface $eventMessage): void
     {
-        $this->metaData = $eventMessage->getMetaData();
-        $this->occurredOn = $eventMessage->getOccurredOn();
+        $this->eventMessage = $eventMessage;
 
         $this->getMethod($eventMessage)($eventMessage->getPayload());
     }
 
     /**
-     * Get meta data.
+     * Get event message.
      *
-     * @return array
+     * @return EventMessageInterface
      */
-    protected function getMetaData(): array
+    public function getEventMessage(): EventMessageInterface
     {
-        return $this->metaData;
-    }
-
-    /**
-     * Get occurred on.
-     *
-     * @return DateTime
-     */
-    protected function getOccurredOn(): DateTime
-    {
-        return $this->occurredOn;
+        return $this->eventMessage;
     }
 }

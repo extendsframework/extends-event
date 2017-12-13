@@ -17,8 +17,7 @@ class AbstractEventListenerTest extends TestCase
      * Test that event message will be dispatched to correct method.
      *
      * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::dispatch()
-     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getMetaData()
-     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getOccurredOn()
+     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getEventMessage()
      */
     public function testDispatch(): void
     {
@@ -29,34 +28,23 @@ class AbstractEventListenerTest extends TestCase
             ->method('getName')
             ->willReturn('PayloadStub');
 
-        $occurredOn = $this->createMock(DateTime::class);
-
-        $eventMessage = $this->createMock(EventMessageInterface::class);
-        $eventMessage
+        $message = $this->createMock(EventMessageInterface::class);
+        $message
             ->method('getPayload')
             ->willReturn($payload);
 
-        $eventMessage
+        $message
             ->method('getPayloadType')
             ->willReturn($payloadType);
 
-        $eventMessage
-            ->method('getMetaData')
-            ->willReturn(['foo' => 'bar']);
-
-        $eventMessage
-            ->method('getOccurredOn')
-            ->willReturn($occurredOn);
-
         /**
-         * @var EventMessageInterface $eventMessage
+         * @var EventMessageInterface $message
          */
         $listener = new ListenerStub();
-        $listener->dispatch($eventMessage);
+        $listener->dispatch($message);
 
         $this->assertSame($payload, $listener->getPayload());
-        $this->assertSame($occurredOn, $listener->getOccurredOn());
-        $this->assertSame(['foo' => 'bar'], $listener->getMetaData());
+        $this->assertSame($message, $listener->getEventMessage());
     }
 }
 
@@ -76,19 +64,11 @@ class ListenerStub extends AbstractEventListener
     }
 
     /**
-     * @return array
+     * @return EventMessageInterface
      */
-    public function getMetaData(): array
+    public function getEventMessage(): EventMessageInterface
     {
-        return parent::getMetaData();
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getOccurredOn(): DateTime
-    {
-        return parent::getOccurredOn();
+        return parent::getEventMessage();
     }
 
     /**
