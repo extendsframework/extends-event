@@ -17,8 +17,6 @@ class AbstractEventListenerTest extends TestCase
      * Test that event message will be dispatched to correct method.
      *
      * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::dispatch()
-     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getMethod()
-     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getPrefix()
      * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getMetaData()
      * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getOccurredOn()
      */
