@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ExtendsFramework\Event\Listener\Exception;
 
+use ExtendsFramework\Event\EventMessageInterface;
 use ExtendsFramework\Event\Listener\EventListenerException;
 use InvalidArgumentException;
 
@@ -11,13 +12,15 @@ class MethodNotFound extends InvalidArgumentException implements EventListenerEx
     /**
      * MethodNotFound constructor.
      *
-     * @param string $name
+     * @param EventMessageInterface $eventMessage
      */
-    public function __construct(string $name)
+    public function __construct(EventMessageInterface $eventMessage)
     {
         parent::__construct(sprintf(
             'No event listener method found for payload name "%s".',
-            $name
+            $eventMessage
+                ->getPayloadType()
+                ->getName()
         ));
     }
 }

@@ -61,7 +61,7 @@ abstract class AbstractEventListener implements EventListenerInterface
         $method = $this->prefix . $name;
 
         if (method_exists($this, $method) === false) {
-            throw new MethodNotFound($name);
+            throw new MethodNotFound($eventMessage);
         }
 
         return new ReflectionMethod($this, $method);
