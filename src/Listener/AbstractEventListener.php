@@ -55,10 +55,9 @@ abstract class AbstractEventListener implements EventListenerInterface
      */
     protected function getMethod(EventMessageInterface $eventMessage): ReflectionMethod
     {
-        $name = $eventMessage
-            ->getPayloadType()
-            ->getName();
-        $method = $this->getPrefix() . $name;
+        $method = $this->getPrefix() . $eventMessage
+                ->getPayloadType()
+                ->getName();
 
         if (method_exists($this, $method) === false) {
             throw new MethodNotFound($eventMessage);
