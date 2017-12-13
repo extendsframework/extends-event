@@ -18,6 +18,9 @@ class AbstractEventListenerTest extends TestCase
      *
      * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::dispatch()
      * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getMethod()
+     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getPrefix()
+     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getMetaData()
+     * @covers \ExtendsFramework\Event\Listener\AbstractEventListener::getOccurredOn()
      */
     public function testDispatch(): void
     {
@@ -125,7 +128,7 @@ class ListenerStub extends AbstractEventListener
      */
     public function getMetaData(): array
     {
-        return $this->metaData;
+        return parent::getMetaData();
     }
 
     /**
@@ -133,7 +136,7 @@ class ListenerStub extends AbstractEventListener
      */
     public function getOccurredOn(): DateTime
     {
-        return $this->occurredOn;
+        return parent::getOccurredOn();
     }
 
     /**

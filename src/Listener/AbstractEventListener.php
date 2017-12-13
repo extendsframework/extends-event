@@ -58,12 +58,42 @@ abstract class AbstractEventListener implements EventListenerInterface
         $name = $eventMessage
             ->getPayloadType()
             ->getName();
-        $method = $this->prefix . $name;
+        $method = $this->getPrefix() . $name;
 
         if (method_exists($this, $method) === false) {
             throw new MethodNotFound($eventMessage);
         }
 
         return new ReflectionMethod($this, $method);
+    }
+
+    /**
+     * Get method prefix.
+     *
+     * @return string
+     */
+    protected function getPrefix(): string
+    {
+        return $this->prefix;
+    }
+
+    /**
+     * Get meta data.
+     *
+     * @return array
+     */
+    protected function getMetaData(): array
+    {
+        return $this->metaData;
+    }
+
+    /**
+     * Get occurred on.
+     *
+     * @return DateTime
+     */
+    protected function getOccurredOn(): DateTime
+    {
+        return $this->occurredOn;
     }
 }
