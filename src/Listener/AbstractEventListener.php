@@ -11,13 +11,6 @@ abstract class AbstractEventListener implements EventListenerInterface
     use PayloadMethodTrait;
 
     /**
-     * Prefix for method.
-     *
-     * @var string
-     */
-    protected $prefix = 'listen';
-
-    /**
      * Event message.
      *
      * @var EventMessageInterface
@@ -31,7 +24,7 @@ abstract class AbstractEventListener implements EventListenerInterface
     {
         $this->eventMessage = $eventMessage;
 
-        $this->getMethod($eventMessage)($eventMessage->getPayload());
+        $this->getMethod($eventMessage, 'listen')($eventMessage->getPayload());
     }
 
     /**
