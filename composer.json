@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": ">=7.1",
+        "extendsframework/extends-servicelocator": "dev-master",
         "extendsframework/extends-message": "dev-master"
     },
     "require-dev": {
