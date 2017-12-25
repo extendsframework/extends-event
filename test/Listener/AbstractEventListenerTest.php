@@ -58,7 +58,7 @@ class ListenerStub extends AbstractEventListener
     /**
      * @param PayloadInterface $payload
      */
-    public function listenPayloadStub(PayloadInterface $payload): void
+    public function onPayloadStub(PayloadInterface $payload): void
     {
         $this->payload = $payload;
     }

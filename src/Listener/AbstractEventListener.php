@@ -24,7 +24,7 @@ abstract class AbstractEventListener implements EventListenerInterface
     {
         $this->eventMessage = $eventMessage;
 
-        $this->getMethod($eventMessage, 'listen')($eventMessage->getPayload());
+        $this->getMethod($eventMessage, 'on')($eventMessage->getPayload());
     }
 
     /**
