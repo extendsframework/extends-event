@@ -25,8 +25,12 @@ class EventMessage extends Message implements EventMessageInterface
      * @param DateTime             $occurredOn
      * @param array                $metaData
      */
-    public function __construct(PayloadInterface $payload, PayloadTypeInterface $payloadType, DateTime $occurredOn, array $metaData)
-    {
+    public function __construct(
+        PayloadInterface $payload,
+        PayloadTypeInterface $payloadType,
+        DateTime $occurredOn,
+        array $metaData
+    ) {
         parent::__construct($payload, $payloadType, $metaData);
 
         $this->occurredOn = $occurredOn;
