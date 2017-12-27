@@ -15,7 +15,7 @@ class EventPublisherFactory implements ServiceFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createService(string $key, ServiceLocatorInterface $serviceLocator, array $extra = null): EventPublisherInterface
+    public function createService(string $key, ServiceLocatorInterface $serviceLocator, array $extra = null): object
     {
         $config = $serviceLocator->getConfig();
         $config = $config[EventPublisherInterface::class] ?? [];
@@ -40,7 +40,7 @@ class EventPublisherFactory implements ServiceFactoryInterface
      * @return EventListenerInterface
      * @throws ServiceLocatorException
      */
-    protected function getEventListener(ServiceLocatorInterface $serviceLocator, string $key): EventListenerInterface
+    protected function getEventListener(ServiceLocatorInterface $serviceLocator, string $key): object
     {
         return $serviceLocator->getService($key);
     }
