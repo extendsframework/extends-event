@@ -14,6 +14,7 @@ class EventPublisherFactory implements ServiceFactoryInterface
 {
     /**
      * @inheritDoc
+     * @throws ServiceLocatorException
      */
     public function createService(string $key, ServiceLocatorInterface $serviceLocator, array $extra = null): object
     {
@@ -21,8 +22,8 @@ class EventPublisherFactory implements ServiceFactoryInterface
         $config = $config[EventPublisherInterface::class] ?? [];
 
         $publisher = new EventPublisher();
-        foreach ($config as $key => $payloadNames) {
-            $listener = $this->getEventListener($serviceLocator, $key);
+        foreach ($config as $listener => $payloadNames) {
+            $listener = $this->getEventListener($serviceLocator, $listener);
 
             foreach ((array)$payloadNames as $payloadName) {
                 $publisher->addEventListener($listener, $payloadName);

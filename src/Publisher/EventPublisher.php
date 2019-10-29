@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ExtendsFramework\Event\Publisher;
 
 use ExtendsFramework\Event\EventMessageInterface;
+use ExtendsFramework\Event\Listener\EventListenerException;
 use ExtendsFramework\Event\Listener\EventListenerInterface;
 
 class EventPublisher implements EventPublisherInterface
@@ -17,6 +18,7 @@ class EventPublisher implements EventPublisherInterface
 
     /**
      * @inheritDoc
+     * @throws EventListenerException
      */
     public function publish(EventMessageInterface $eventMessage): void
     {
