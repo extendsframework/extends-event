@@ -15,7 +15,7 @@ class EventMessage extends Message implements EventMessageInterface
      *
      * @var DateTime
      */
-    protected $occurredOn;
+    private $occurredOn;
 
     /**
      * EventMessage constructor.

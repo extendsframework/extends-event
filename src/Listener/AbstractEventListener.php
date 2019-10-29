@@ -15,7 +15,7 @@ abstract class AbstractEventListener implements EventListenerInterface
      *
      * @var EventMessageInterface
      */
-    protected $eventMessage;
+    private $eventMessage;
 
     /**
      * @inheritDoc

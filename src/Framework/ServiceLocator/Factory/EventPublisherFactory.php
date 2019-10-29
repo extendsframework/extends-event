@@ -41,7 +41,7 @@ class EventPublisherFactory implements ServiceFactoryInterface
      * @return EventListenerInterface
      * @throws ServiceLocatorException
      */
-    protected function getEventListener(ServiceLocatorInterface $serviceLocator, string $key): object
+    private function getEventListener(ServiceLocatorInterface $serviceLocator, string $key): object
     {
         return $serviceLocator->getService($key);
     }

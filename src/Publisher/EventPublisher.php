@@ -14,7 +14,7 @@ class EventPublisher implements EventPublisherInterface
      *
      * @var EventListenerInterface[][]
      */
-    protected $eventListeners = [];
+    private $eventListeners = [];
 
     /**
      * @inheritDoc
@@ -48,7 +48,7 @@ class EventPublisher implements EventPublisherInterface
      * @param EventMessageInterface $eventMessage
      * @return EventListenerInterface[]
      */
-    protected function getEventListeners(EventMessageInterface $eventMessage): array
+    private function getEventListeners(EventMessageInterface $eventMessage): array
     {
         return $this->eventListeners[$eventMessage
                 ->getPayloadType()
