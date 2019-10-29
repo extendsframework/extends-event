@@ -50,6 +50,8 @@ class EventPublisher implements EventPublisherInterface
      */
     protected function getEventListeners(EventMessageInterface $eventMessage): array
     {
-        return $this->eventListeners[$eventMessage->getPayloadType()->getName()] ?? [];
+        return $this->eventListeners[$eventMessage
+                ->getPayloadType()
+                ->getName()] ?? [];
     }
 }
