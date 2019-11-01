@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace ExtendsFramework\Event\Listener;
 
-use ExtendsFramework\Event\EventMessageInterface;
 use ExtendsFramework\Message\Payload\PayloadInterface;
 
 class ListenerStub extends AbstractEventListener
@@ -19,14 +18,6 @@ class ListenerStub extends AbstractEventListener
     public function onPayloadStub(PayloadInterface $payload): void
     {
         $this->payload = $payload;
-    }
-
-    /**
-     * @return EventMessageInterface
-     */
-    public function getEventMessage(): EventMessageInterface
-    {
-        return parent::getEventMessage();
     }
 
     /**

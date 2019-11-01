@@ -17,7 +17,6 @@ class EventPublisherTest extends TestCase
      *
      * @covers \ExtendsFramework\Event\Publisher\EventPublisher::addEventListener()
      * @covers \ExtendsFramework\Event\Publisher\EventPublisher::publish()
-     * @covers \ExtendsFramework\Event\Publisher\EventPublisher::getEventListeners()
      */
     public function testPublish(): void
     {

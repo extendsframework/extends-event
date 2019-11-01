@@ -16,7 +16,6 @@ class EventPublisherFactoryTest extends TestCase
      * Test that command dispatcher will be created from config.
      *
      * @covers \ExtendsFramework\Event\Framework\ServiceLocator\Factory\EventPublisherFactory::createService()
-     * @covers \ExtendsFramework\Event\Framework\ServiceLocator\Factory\EventPublisherFactory::getEventListener()
      */
     public function testCreateService(): void
     {

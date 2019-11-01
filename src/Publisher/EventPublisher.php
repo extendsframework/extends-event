@@ -22,7 +22,11 @@ class EventPublisher implements EventPublisherInterface
      */
     public function publish(EventMessageInterface $eventMessage): void
     {
-        $eventListeners = $this->getEventListeners($eventMessage);
+        $name = $eventMessage
+            ->getPayloadType()
+            ->getName();
+
+        $eventListeners = $this->eventListeners[$name] ?? [];
         foreach ($eventListeners as $eventListener) {
             $eventListener->dispatch($eventMessage);
         }
@@ -40,20 +44,5 @@ class EventPublisher implements EventPublisherInterface
         $this->eventListeners[$payloadName][] = $eventListener;
 
         return $this;
-    }
-
-    /**
-     * Get event listeners.
-     *
-     * @param EventMessageInterface $eventMessage
-     * @return EventListenerInterface[]
-     */
-    private function getEventListeners(EventMessageInterface $eventMessage): array
-    {
-        $name = $eventMessage
-            ->getPayloadType()
-            ->getName();
-
-        return $this->eventListeners[$name] ?? [];
     }
 }
